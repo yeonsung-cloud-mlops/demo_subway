@@ -22,7 +22,7 @@
     "AWS_INSTANCE_ID"
   ],
   "github_variable": {
-    "AWS_DEPLOY_ENABLED": "true"
+    "AWS_DEPLOY_ENABLED": "false"
   },
   "workflow_url": "https://github.com/yeonsung-cloud-mlops/subway/actions/workflows/deploy.yml",
   "initial_validation": {
@@ -33,5 +33,28 @@
     "public_ip_smoke_test": "passed",
     "original_files_loaded": 24,
     "ridership_records": 597970
+  },
+  "status": "decommissioned",
+  "decommissioned_on": "2026-10-07",
+  "decommissioning": {
+    "region": "ap-northeast-2",
+    "stack_status": "DELETE_COMPLETE",
+    "instance_state": "terminated",
+    "retained_resources_deleted": [
+      "vol-07ed76669e46e570c",
+      "subway/backend",
+      "subway/frontend",
+      "subway-production-backupbucket-lsac5g4l1nn0"
+    ],
+    "public_ip_released": true,
+    "vpc_deleted": "vpc-0d0292b46304d73e4",
+    "backup_objects_before_deletion": 0,
+    "ebs_snapshots_before_deletion": 0,
+    "shared_dependencies_found": false,
+    "other_services_verified": {
+      "hexai-hub": "UPDATE_COMPLETE; EC2 running; instance/system/EBS checks ok",
+      "gangjin-proposal": "CREATE_COMPLETE; EC2 running; instance/system/EBS checks ok"
+    },
+    "historical_resource_fields": "Provisioning records only; IDs, public IP and service URL above are no longer active."
   }
 }

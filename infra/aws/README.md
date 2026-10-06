@@ -1,5 +1,25 @@
 # 서울 EC2 + GitHub Actions 배포
 
+## 운영 종료 — 2026-10-07
+
+사용자 요청과 영구 삭제 확인에 따라 서울 리전의 `subway-production` 스택을 삭제했습니다
+(`DELETE_COMPLETE`). EC2, 루트 디스크, Elastic IP, 프로젝트 VPC·서브넷·라우팅·보안 그룹,
+프로젝트 IAM 역할·인스턴스 프로필·GitHub OIDC provider 및 SSM document가 제거되었습니다.
+`Retain` 정책으로 남은 데이터 EBS 볼륨, ECR 저장소 `subway/backend`·`subway/frontend`,
+빈 S3 백업 버킷도 별도로 삭제하고 실제 부재를 확인했습니다. 삭제 전 S3 백업 객체와
+EBS 스냅샷은 없었으며, SQLite 데이터와 컨테이너 이미지를 보존하지 않았습니다.
+
+삭제 전 프로젝트 VPC의 ENI, 피어링, 엔드포인트, NAT gateway, Transit Gateway 연결,
+외부 보안 그룹 참조와 IAM OIDC 신뢰 관계를 확인했습니다. GitHub OIDC를 사용하는 역할은
+`subway-github-deploy` 하나였습니다. 다른 서비스 `hexai-hub`·`gangjin-proposal`은 별도 VPC이며,
+삭제 후에도 스택 상태와 EC2 실행 상태를 유지하고 인스턴스·시스템·EBS 검사가 정상입니다.
+
+이 저장소의 GitHub Actions 변수 `AWS_DEPLOY_ENABLED=false`로 자동 AWS 배포를 중지했습니다.
+`deployment.json`의 기존 리소스 ID·IP·URL은 최초 구축 이력이며 현재 접속 대상이 아닙니다.
+아래 구축·복구 절차는 참고용으로 유지하며, 재배포하려면 인프라를 새로 구축하고 리소스 ID와
+배포 설정을 갱신해야 합니다.
+
+
 대상: AWS `410618141864`, 서울 `ap-northeast-2`, GitHub `yeonsung-cloud-mlops/subway`의 `main`.
 
 ## 생성된 환경
